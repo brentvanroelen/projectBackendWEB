@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
+use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -27,24 +26,41 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        \Log::info('Registratie formulier ingediend');
 
+        // Validatie voor de extra velden
+        $validatedData = $request->validate([
+            
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:2',
+            'username' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string',
+        ]);
+    
+        // Profielfoto opslaan (indien aanwezig)
+        if ($request->hasFile('profilePicture')) {
+            $validatedData['profile_picture'] = $request->file('profilePicture')->store('profile_pictures', 'public');
+        }
+    
+        // Maak de gebruiker aan
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+           
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'username' => $validatedData['username'],
+            'birthday' => $validatedData['birthday'],
+            'profile_picture' => $validatedData['profile_picture'] ?? null,
+            'description' => $validatedData['description'],
         ]);
-
-        event(new Registered($user));
-
+    
+        // Log de gebruiker direct in
         Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
-    }
+    
+       // Succesvolle registratie - doorverwijzing naar dashboard
+        return redirect()->route('dashboard');
+ }
 }
