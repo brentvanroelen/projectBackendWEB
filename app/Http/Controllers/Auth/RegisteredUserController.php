@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
         // Log de gebruiker direct in
         Auth::login($user);
     
-       // Succesvolle registratie - doorverwijzing naar dashboard
+       
         return redirect()->route('dashboard');
  }
 }

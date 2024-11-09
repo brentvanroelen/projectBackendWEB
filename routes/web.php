@@ -25,7 +25,7 @@ Route::get('/profile', function () {
 })->middleware(['auth'])->name('profile');
 
 
-Route::get('/films', [FilmController::class, 'showFilms']);
+Route::get('/films', [FilmController::class, 'showFilms'])->name('films.index');
 
 
 require __DIR__.'/auth.php';
