@@ -1,10 +1,20 @@
 
+@extends('layouts.mainLayout')
 
-<header>
-<h2>Welcome</h2>
+@section('title', 'Welcome')
 
-@include('components.menu')
+@section('menu')
+    @include('components.menu')
+@endsection
 
-</header>
+@section('content')
+<div class="welcome-header">
+    <h1>Welcome to MyApp</h1>
+    <p>Your ultimate movie tracking app</p>
+    <a href="{{ route('films.index') }}" class="btn">Get Started</a>
+</div>
+@endsection
 
-
+@section('footer')
+    <p>&copy; 2024 MyApp. All rights reserved.</p>
+@endsection

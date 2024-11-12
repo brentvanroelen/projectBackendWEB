@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\AddFilmsToListController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/films/add-to-list/{listTitle}', [AddFilmsToListController::class, 'addToList'])->name('films.addToList');
+    Route::get('/film-lists', [AddFilmsToListController::class, 'showLists'])->name('filmLists.index');
 });
 
 Route::get('/profile', function () {
@@ -25,7 +28,10 @@ Route::get('/profile', function () {
 })->middleware(['auth'])->name('profile');
 
 
-Route::get('/films', [FilmController::class, 'showFilms'])->name('films.index');
+Route::get('/films', 
+[FilmController::class, 'showFilms'])
+->name('films.index');
+
 
 
 require __DIR__.'/auth.php';
