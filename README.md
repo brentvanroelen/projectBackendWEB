@@ -3,4 +3,7 @@ Login en hulp met de API: https://chatgpt.com/share/672a0051-813c-8011-9710-1d34
 Brainstorm: https://chatgpt.com/share/672f3e9c-d3f0-8011-8970-165657369515
 API bron : https://www.themoviedb.org/?language=fr
 Troubleshoot/hulp bij file upload en die te displayen: https://chatgpt.com/share/672f439f-3950-8011-9c92-a64ff1149648
+Commit 12/11 : CSS alsook problemen met de code opgelost samen met Copilot.
+Welcome page achtergrond : https://chatgpt.com/share/673382e6-cd34-8011-8474-a1129cc7ec59
+
 
