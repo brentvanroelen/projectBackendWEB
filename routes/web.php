@@ -4,6 +4,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\AddFilmsToListController;
+use App\Http\Controllers\AdminController;
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/home', [AdminController::class, 'home'])->name('admin.home');
+    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+    Route::post('/admin/users/{user}/promote', [AdminController::class, 'promote'])->name('admin.users.promote');
+    Route::post('/admin/users/{user}/demote', [AdminController::class, 'demote'])->name('admin.users.demote');
+    Route::post('/admin/users', [AdminController::class, 'store'])->name('admin.users.store');
+});
+
 
 Route::get('/', function () {
     return view('welcome');
