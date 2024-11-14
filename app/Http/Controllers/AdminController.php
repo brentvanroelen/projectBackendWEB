@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/AdminController.php
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -7,27 +6,18 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function home()
-    {
-        return view('admin.home');
-    }
-
-    public function index()
-    {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
-    }
-
     public function promote(User $user)
     {
-        $user->update(['role' => 'admin']);
-        return back()->with('status', 'User promoted to admin.');
+        $user->role = 'admin';
+        $user->save();
+        return redirect()->route('admin.users.index');
     }
 
     public function demote(User $user)
     {
-        $user->update(['role' => 'user']);
-        return back()->with('status', 'Admin rights removed.');
+        $user->role = 'user';
+        $user->save();
+        return redirect()->route('admin.users.index');
     }
 
     public function store(Request $request)
@@ -46,6 +36,6 @@ class AdminController extends Controller
             'role' => $request->role,
         ]);
 
-        return back()->with('status', 'User created successfully.');
+        return redirect()->route('admin.users.index');
     }
 }

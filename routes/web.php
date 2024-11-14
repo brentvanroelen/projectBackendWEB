@@ -6,9 +6,23 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\AddFilmsToListController;
 use App\Http\Controllers\AdminController;
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/home', [AdminController::class, 'home'])->name('admin.home');
-    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+//enorm veel problemen gehad bij het groeperen van de admin routes, uiteindelijk is het gelukt door alles uit elkaar te halen
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/home', function () {
+        if (auth()->user()->role !== 'admin') {
+            return redirect('/');
+        }
+        return view('admin.home');
+    })->name('admin.home');
+
+    Route::get('/admin/users', function () {
+        if (auth()->user()->role !== 'admin') {
+            return redirect('/');
+        }
+        $users = \App\Models\User::all();
+        return view('admin.users.index', compact('users'));
+    })->name('admin.users.index');
+
     Route::post('/admin/users/{user}/promote', [AdminController::class, 'promote'])->name('admin.users.promote');
     Route::post('/admin/users/{user}/demote', [AdminController::class, 'demote'])->name('admin.users.demote');
     Route::post('/admin/users', [AdminController::class, 'store'])->name('admin.users.store');
