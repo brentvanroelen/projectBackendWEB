@@ -52,9 +52,7 @@ Route::get('/profile', function () {
 })->middleware(['auth'])->name('profile');
 
 
-Route::get('/films', 
-[FilmController::class, 'showFilms'])
-->name('films.index');
+Route::get('/films', [FilmController::class, 'showFilms'])->name('films.index');
 
 
 
