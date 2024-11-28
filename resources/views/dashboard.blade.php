@@ -1,12 +1,18 @@
-<h2>Proficiat je maakt deel uit van deze leuke community:</h2>
+@extends('layouts.mainLayout')
 
+@section('title', 'Dashboard')
 
-<p>Momenteel zijn we nogbezig met het maken van de site maar binnenkort kan je films gaan opzoekenen toevoegen.</p>
+@section('content')
+<div class="dashboard-container">
+    <div class="dashboard-card">
+        <h2>{{ __('Dashboard') }}</h2>
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
 
-<button> <a href = "{{ route ('welcome')}}" class="btn btn-primary" >Welcome page </a> </button>
-<button> <a href = "{{ route ('profile')}}" class="btn btn-primary" >Profile </a> </button>
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit">Log Out</button>
-</form>
-
+        <p>{{ __('You are logged in!') }}</p>
+    </div>
+</div>
+@endsection

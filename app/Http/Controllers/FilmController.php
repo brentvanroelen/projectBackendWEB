@@ -8,6 +8,8 @@ class FilmController extends Controller
 {
     public function showFilms(Request $request)
     {
+        //dd(env('TMDB_API_KEY')); // Voeg deze regel toe voor debugging
+
         $query = $request->input('query');
         $filter = $request->input('filter');    
 

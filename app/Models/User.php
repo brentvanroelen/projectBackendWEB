@@ -38,4 +38,8 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+    public function filmLists()
+    {
+        return $this->hasMany(FilmList::class);
+    }
 }

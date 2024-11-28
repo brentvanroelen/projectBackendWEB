@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +8,13 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 <body>
-    @include('components.adminNavbar')
-    <div class="container">
-        @yield('content')
+    <div class="admin-layout">
+        <div class="admin-navbar">
+            @include('components.adminNavbar')
+        </div>
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 </body>
 </html>

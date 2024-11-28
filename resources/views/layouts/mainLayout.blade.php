@@ -10,9 +10,7 @@
 <body>
     <div id="app">
         <!-- Navigation -->
-        <nav>
-            @yield('menu')
-        </nav>
+        @include('components.menu')
 
         <!-- Main Content -->
         <main class="py-4">
@@ -21,7 +19,7 @@
 
         <!-- Footer -->
         <footer>
-            @yield('footer')
+            @include('components.footer')
         </footer>
     </div>
 </body>

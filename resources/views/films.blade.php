@@ -1,4 +1,4 @@
-<!-- resources/views/films.blade.php -->
+
 @extends('layouts.mainLayout')
 
 @section('title', 'Films')

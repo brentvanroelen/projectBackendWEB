@@ -5,5 +5,9 @@ API bron : https://www.themoviedb.org/?language=fr
 Troubleshoot/hulp bij file upload en die te displayen: https://chatgpt.com/share/672f439f-3950-8011-9c92-a64ff1149648
 Commit 12/11 : CSS alsook problemen met de code opgelost samen met Copilot.
 Welcome page achtergrond : https://chatgpt.com/share/673382e6-cd34-8011-8474-a1129cc7ec59
+Debuggen van een probleempje met de lists: https://chatgpt.com/share/67483b0f-9c58-8011-a873-05d494cf6ff1
+Alle styling gemaakt met Copilot (in vsc)
+Footer gemaakt met behulp van chat gpt: https://chatgpt.com/share/67485912-4898-8011-a14b-0758d3e156ef
+
 
 
