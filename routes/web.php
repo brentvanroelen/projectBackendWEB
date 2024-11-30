@@ -6,9 +6,13 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\AddFilmsToListController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FaqCategoryController;
+use App\Http\Controllers\FaqQuestionController;
+use App\Http\Controllers\ContactController;
 
 //enorm veel problemen gehad bij het groeperen van de admin routes, uiteindelijk is het gelukt door alles uit elkaar te halen
 
+Route::get('/faq', [FaqCategoryController::class, 'index'])->name('faq.index');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/home', function () {
         if (Auth::user()->role !== 'admin') {
@@ -35,7 +39,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/news/{news}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
     Route::put('/admin/news/{news}', [NewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+
+    Route::resource('faq/categories', FaqCategoryController::class);
+    Route::resource('faq/questions', FaqQuestionController::class);
 });
+
+
+
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/', function () {
     $newsItems = \App\Models\News::latest()->take(3)->get(); // Haal de laatste 3 nieuwsitems op

@@ -11,6 +11,20 @@ header, footer {
     padding: 10px 0;
     text-align: center;
 }
+footer .footer-links {
+    margin-top: 10px;
+}
+
+footer .footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+footer .footer-links a:hover {
+    text-decoration: underline;
+}
 
 main {
     padding: 20px;
@@ -46,6 +60,20 @@ main {
     text-decoration: underline;
 }
 
+.faq-container, .contact-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-category, .faq-question {
+    margin-bottom: 20px;
+}
+
+.faq-category h3, .faq-question h4 {
+    margin-bottom: 10px;
+}
 
 .welcome-header {
     background: url('/images/Welcome.jpg') no-repeat center center/cover;

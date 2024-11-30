@@ -8,6 +8,7 @@ Welcome page achtergrond : https://chatgpt.com/share/673382e6-cd34-8011-8474-a11
 Debuggen van een probleempje met de lists: https://chatgpt.com/share/67483b0f-9c58-8011-a873-05d494cf6ff1
 Alle styling gemaakt met Copilot (in vsc)
 Footer gemaakt met behulp van chat gpt: https://chatgpt.com/share/67485912-4898-8011-a14b-0758d3e156ef
+Hulp met FAQ en contact: https://chatgpt.com/share/674ae76d-0d1c-8011-b5f7-f386ab214d2c
 
 
 
