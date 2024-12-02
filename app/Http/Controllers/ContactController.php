@@ -21,7 +21,7 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        Mail::to('admin@example.com')->send(new ContactFormMail($request->all()));
+        Mail::to('admin@ehb.be')->send(new ContactFormMail($request->all()));
 
         return back()->with('status', 'Your message has been sent successfully!');
     }

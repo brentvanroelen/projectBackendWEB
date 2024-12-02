@@ -1,11 +1,17 @@
-
 @extends('layouts.admin')
 
 @section('title', 'Manage Users')
 
 @section('content')
-    <h1>Manage Users</h1>
-    <table>
+<div class="admin-container">
+    <h2>Manage Users</h2>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Create User</a>
+    <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -15,21 +21,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach ($users as $user)
             <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>
+                <td>{{ htmlspecialchars($user->name, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($user->role, ENT_QUOTES, 'UTF-8') }}</td>
                 <td>
-                    @if($user->role === 'user')
+                    @if ($user->role !== 'admin')
                     <form method="POST" action="{{ route('admin.users.promote', $user) }}">
                         @csrf
-                        <button type="submit">Promote to Admin</button>
+                        <button type="submit" class="btn btn-success">Promote to Admin</button>
                     </form>
                     @else
                     <form method="POST" action="{{ route('admin.users.demote', $user) }}">
                         @csrf
-                        <button type="submit">Demote to User</button>
+                        <button type="submit" class="btn btn-warning">Demote to User</button>
                     </form>
                     @endif
                 </td>
@@ -37,33 +43,5 @@
             @endforeach
         </tbody>
     </table>
-
-    <h2>Create New User</h2>
-    <form method="POST" action="{{ route('admin.users.store') }}">
-        @csrf
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <label for="password_confirmation">Confirm Password:</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" required>
-        </div>
-        <div>
-            <label for="role">Role:</label>
-            <select id="role" name="role" required>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-        <button type="submit">Create User</button>
-    </form>
+</div>
 @endsection

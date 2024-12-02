@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -30,12 +32,12 @@ class AdminController extends Controller
         ]);
 
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => $request->role,
+            'name' => htmlspecialchars($request->name, ENT_QUOTES, 'UTF-8'),
+            'email' => htmlspecialchars($request->email, ENT_QUOTES, 'UTF-8'),
+            'password' => Hash::make($request->password),
+            'role' => htmlspecialchars($request->role, ENT_QUOTES, 'UTF-8'),
         ]);
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('status', 'User created successfully.');
     }
 }

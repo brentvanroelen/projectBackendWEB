@@ -6,9 +6,9 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
+            'host' => env('MAIL_HOST', 'sandbox.smtp.mailtrap.io'),
             'port' => env('MAIL_PORT', 2525),
-            'encryption' => env('MAIL_ENCRYPTION', null),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
@@ -17,7 +17,7 @@ return [
     ],
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 

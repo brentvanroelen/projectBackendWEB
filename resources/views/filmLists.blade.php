@@ -1,7 +1,6 @@
-
 @extends('layouts.mainLayout')
 
-@section('title', 'Your film lists')
+@section('title', 'Film Lists')
 
 @section('menu')
     @include('components.menu')
@@ -9,30 +8,24 @@
 
 @section('content')
 <div class="container">
-    <h1>Your Film Lists</h1>
-    <input type="text" id="search" placeholder="Search films..." onkeyup="searchFilms()">
-    
+    <h2>Film Lists</h2>
     @foreach($filmLists as $filmList)
-        <h2>{{ str_replace('_', ' ', $filmList->title) }}</h2>
-        <div class="scrollable-list">
-            <ul id="filmList-{{ $filmList->id }}">
+        <div class="film-list">
+            <h3>{{ ucfirst($filmList->title) }} List</h3>
+            <div class="film-grid">
                 @foreach($filmList->items as $item)
-                    <li>
+                    <div class="film-card">
                         <img src="https://image.tmdb.org/t/p/w200{{ $item->film_poster }}" alt="{{ $item->film_title }}">
-                        {{ $item->film_title }}
-                    </li>
+                        <h3>{{ $item->film_title }}</h3>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
     @endforeach
 </div>
 @endsection
 
-@section('footer')
-    <p>This is the footer</p>
-@endsection
-
-<script>
+<!-- <script>
 function searchFilms() {
     var input, filter, ul, li, i, txtValue;
     input = document.getElementById('search');
@@ -50,4 +43,4 @@ function searchFilms() {
         }
     });
 }
-</script>
+</script> -->

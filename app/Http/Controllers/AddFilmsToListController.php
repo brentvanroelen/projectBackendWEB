@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use App\Models\FilmList;
 
 class AddFilmsToListController extends Controller
@@ -21,6 +21,7 @@ class AddFilmsToListController extends Controller
 
         return back()->with('status', 'Film added to ' . $listTitle . ' list.');
     }
+
     public function showLists()
     {
         $user = Auth::user();

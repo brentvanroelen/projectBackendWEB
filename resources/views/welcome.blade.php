@@ -13,6 +13,10 @@
     <a href="{{ route('films.index') }}" class="btn">Get Started</a>
 </div>
 
+<div class="centered-button">
+    <a href="{{ route('profiles.index') }}" class="btn btn-primary">View All Profiles</a>
+</div>
+
 <div class="news-section">
     <h2>Latest News</h2>
     @foreach($newsItems as $news)
