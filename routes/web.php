@@ -11,8 +11,8 @@ use App\Http\Controllers\FaqQuestionController;
 use App\Http\Controllers\ContactController;
 
 //enorm veel problemen gehad bij het groeperen van de admin routes, uiteindelijk is het gelukt door alles uit elkaar te halen
+Route::get('/faq', [FaqCategoryController::class, 'showFaq'])->name('faq.index');
 
-Route::get('/faq', [FaqCategoryController::class, 'index'])->name('faq.index');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/home', function () {
         if (Auth::user()->role !== 'admin') {
@@ -40,11 +40,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/news/{news}', [NewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
-    Route::resource('faq/categories', FaqCategoryController::class);
-    Route::resource('faq/questions', FaqQuestionController::class);
+    Route::resource('admin/faq-categories', FaqCategoryController::class, ['as' => 'admin']);
+    Route::resource('admin/faq-questions', FaqQuestionController::class, ['as' => 'admin']);
 });
-
-
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
@@ -57,11 +55,9 @@ Route::get('/', function () {
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

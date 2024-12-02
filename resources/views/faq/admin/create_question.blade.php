@@ -1,11 +1,11 @@
-@extends('layouts.mainLayout')
+@extends('layouts.admin')
 
 @section('title', 'Create Question')
 
 @section('content')
 <div class="faq-admin-container">
     <h2>Create Question</h2>
-    <form method="POST" action="{{ route('faq.questions.store') }}">
+    <form method="POST" action="{{ route('admin.faq-questions.store') }}">
         @csrf
         <div class="form-group">
             <label for="faq_category_id">{{ __('Category') }}</label>

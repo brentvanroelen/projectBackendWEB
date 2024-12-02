@@ -9,8 +9,8 @@ class FaqCategoryController extends Controller
 {
     public function index()
     {
-        $categories = FaqCategory::with('questions')->get();
-        return view('faq.index', compact('categories'));
+        $categories = FaqCategory::all();
+        return view('faq.admin.manageCategories', compact('categories'));
     }
 
     public function create()
@@ -24,9 +24,9 @@ class FaqCategoryController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        FaqCategory::create($request->all());
+        FaqCategory::create($request->only('name'));
 
-        return redirect()->route('faq.categories.index')->with('status', 'Category created successfully.');
+        return redirect()->route('admin.faq-categories.index')->with('status', 'Category created successfully.');
     }
 
     public function edit(FaqCategory $category)
@@ -40,14 +40,20 @@ class FaqCategoryController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $category->update($request->all());
+        $category->update($request->only('name'));
 
-        return redirect()->route('faq.categories.index')->with('status', 'Category updated successfully.');
+        return redirect()->route('admin.faq-categories.index')->with('status', 'Category updated successfully.');
     }
 
     public function destroy(FaqCategory $category)
     {
         $category->delete();
-        return redirect()->route('faq.categories.index')->with('status', 'Category deleted successfully.');
+        return redirect()->route('admin.faq-categories.index')->with('status', 'Category deleted successfully.');
+    }
+
+    public function showFaq()
+    {
+        $categories = FaqCategory::with('questions')->get();
+        return view('faq.index', compact('categories'));
     }
 }

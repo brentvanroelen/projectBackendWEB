@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class FaqQuestionController extends Controller
 {
+    public function index()
+    {
+        $questions = FaqQuestion::with('category')->get();
+        return view('faq.admin.manageQuestions', compact('questions'));
+    }
+
     public function create()
     {
         $categories = FaqCategory::all();
@@ -22,9 +28,9 @@ class FaqQuestionController extends Controller
             'answer' => 'required|string',
         ]);
 
-        FaqQuestion::create($request->all());
+        FaqQuestion::create($request->only('faq_category_id', 'question', 'answer'));
 
-        return redirect()->route('faq.categories.index')->with('status', 'Question created successfully.');
+        return redirect()->route('admin.faq-questions.index')->with('status', 'Question created successfully.');
     }
 
     public function edit(FaqQuestion $question)
@@ -41,14 +47,14 @@ class FaqQuestionController extends Controller
             'answer' => 'required|string',
         ]);
 
-        $question->update($request->all());
+        $question->update($request->only('faq_category_id', 'question', 'answer'));
 
-        return redirect()->route('faq.categories.index')->with('status', 'Question updated successfully.');
+        return redirect()->route('admin.faq-questions.index')->with('status', 'Question updated successfully.');
     }
 
     public function destroy(FaqQuestion $question)
     {
         $question->delete();
-        return redirect()->route('faq.categories.index')->with('status', 'Question deleted successfully.');
+        return redirect()->route('admin.faq-questions.index')->with('status', 'Question deleted successfully.');
     }
 }
