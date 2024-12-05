@@ -10,6 +10,7 @@ use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\FaqQuestionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ReviewController;
 
 
 //enorm veel problemen gehad bij het groeperen van de admin routes, uiteindelijk is het gelukt door alles uit elkaar te halen
@@ -68,6 +69,7 @@ Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/films/{film}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });
 
 Route::get('/profile', function () {

@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Film::class, 'film_list_items', 'user_id', 'film_id')
                     ->wherePivot('list_type', 'to_watch');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

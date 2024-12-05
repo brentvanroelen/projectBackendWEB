@@ -44,6 +44,12 @@ main {
     align-items: center;
 }
 
+.google-maps {
+    width: 100%;
+    height: 400px; /* Pas de hoogte aan indien nodig */
+    border: 0;
+}
+
 .navbar .navbar-links {
     display: flex;
     align-items: center;
@@ -206,21 +212,30 @@ main {
 }
 
 .film-card .btn-success {
-    background-color: #9999FF;
+    background-color: #28a745;
     color: white;
 }
 
 .film-card .btn-success:hover {
-    background-color: #6666FF;
+    background-color: #218838;
 }
 
 .film-card .btn-warning {
-    background-color: #666;
+    background-color: #ffc107;
     color: white;
 }
 
 .film-card .btn-warning:hover {
-    background-color: #333;
+    background-color: #e0a800;
+}
+
+.film-card .btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.film-card .btn-info:hover {
+    background-color: #138496;
 }
 .news-section {
     margin-top: 40px;

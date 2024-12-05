@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,26 +9,32 @@ class FilmController extends Controller
 {
     public function showFilms(Request $request)
     {
-        //dd(env('TMDB_API_KEY')); // Voeg deze regel toe voor debugging
+        $apiKey = env('TMDB_API_KEY');
+        $query = $request->input('query', '');
+        $filter = $request->input('filter', '');
 
-        $query = $request->input('query');
-        $filter = $request->input('filter');    
+        $url = 'https://api.themoviedb.org/3/discover/movie';
+        $params = [
+            'api_key' => $apiKey,
+            'query' => $query,
+        ];
 
-        $endpoint = match($filter) {
-            'top_rated' => 'movie/top_rated',
-            'upcoming' => 'movie/upcoming',
-            default => 'movie/popular',
-        };
+        if ($filter === 'popular') {
+            $url = 'https://api.themoviedb.org/3/movie/popular';
+        } elseif ($filter === 'top_rated') {
+            $url = 'https://api.themoviedb.org/3/movie/top_rated';
+        } elseif ($filter === 'upcoming') {
+            $url = 'https://api.themoviedb.org/3/movie/upcoming';
+        }
 
-        $response = Http::get("https://api.themoviedb.org/3/" . ($query ? 'search/movie' : $endpoint), [
-            'api_key' => env('TMDB_API_KEY'),
-            'language' => 'en-US',
-            'query' => $query, 
-        ]);
+        $response = Http::get($url, $params);
 
-        $movies = $response->json(); 
+        if ($response->successful()) {
+            $movies = $response->json()['results'];
+        } else {
+            $movies = [];
+        }
 
-        return view('films', ['movies' => $movies['results'] ?? []]);
+        return view('films', compact('movies'));
     }
 }
-

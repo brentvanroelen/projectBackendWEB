@@ -16,19 +16,15 @@ class Film extends Model
         'release_date',
     ];
 
-    // Many-to-Many relationship: Film has many Users through FilmListItems
     public function usersSeen()
     {
-        return $this->belongsToMany(User::class, 'film_list_items', 'film_id', 'user_id')
-                    ->wherePivot('list_type', 'seen');
+        return $this->belongsToMany(User::class, 'seen_films');
     }
 
     public function usersWantToWatch()
     {
-        return $this->belongsToMany(User::class, 'film_list_items', 'film_id', 'user_id')
-                    ->wherePivot('list_type', 'to_watch');
+        return $this->belongsToMany(User::class, 'want_to_watch_films');
     }
-
     public function reviews()
     {
         return $this->hasMany(Review::class);
