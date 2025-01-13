@@ -10,7 +10,7 @@ Welcome to the **Movie List Manager** project! This Laravel-based web applicatio
 - **Movie Lists**:
   - Add movies to "To See" and "Seen" lists.
   - Review and rate movies.
-  - View other users' movie lists and reviews.
+  - View other users' reviews.
 - **Admin Panel**:
   - Manage users, FAQs, and latest movie news.
 - **Search Functionality**: Quickly find movies and users.
@@ -70,7 +70,7 @@ This application relies heavily on **The Movie Database (TMDB) API** for movie d
 ### Managing Movie Lists
 - Add movies to your "To See" or "Seen" lists using search.
 - Leave reviews and rate movies.
-- Browse other users' reviews and ratings.
+- Browse other users' ratings.
 
 ### Admin Features
 - Create and manage news articles.
